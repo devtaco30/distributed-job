@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    hikari:
+      connectionInitSql: set time zone 'Asia/Seoul'
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: username
+    password: password
+    
+application:
+  job-reg-center:
+    serverLists: localhost:6181
+    namespace: distributed-job-center
+
+slack:
+  channel: channleID
+  token: slackBotToken
