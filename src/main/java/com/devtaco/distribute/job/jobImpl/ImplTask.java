@@ -10,7 +10,7 @@ import com.devtaco.distribute.model.ImplValue;
 import com.devtaco.distribute.repository.DataManager;
 import com.devtaco.distribute.service.SlackService;
 
-public class ImpleTask implements DistributeTask {
+public class ImplTask implements DistributeTask {
 
   private static final int CALCULATION_MAX_RETRY = 3; // 값 계산 -> 검증후 fail 인 경우, 몇 번까지 retry 할 건지..
 
@@ -22,7 +22,7 @@ public class ImpleTask implements DistributeTask {
 
   private ImplValue value;
 
-  public ImpleTask(ImplSpec spec, DataManager dataManager, SlackService slackBot) {
+  public ImplTask(ImplSpec spec, DataManager dataManager, SlackService slackBot) {
     this.spec = spec;
     this.dataManager = dataManager;
     this.slackBot = slackBot;
