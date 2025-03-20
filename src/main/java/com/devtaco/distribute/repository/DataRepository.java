@@ -4,12 +4,14 @@ import java.util.List;
 
 import com.devtaco.distribute.model.ImplSpec;
 import com.devtaco.distribute.model.ImplValue;
+import org.springframework.stereotype.Repository;
 
 /**
  * 지수 Repository 를 정의해둔다. <p>
  * 물론 Component로 띄우기 위해 class로 선언을 할 것이지만. <p>
  * pseudo code 형식이기에 interface 형태로 둔다.
  */
+@Repository
 public interface DataRepository {
 
   List<ImplSpec> getAllJobSpec();

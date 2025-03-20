@@ -5,6 +5,10 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+/**
+ * JobSpec의 구체적인 구현체입니다.
+ * 작업 생성 조건과 실행 여부를 관리합니다.
+ */
 @ToString
 @Getter
 @Setter
@@ -15,8 +19,13 @@ public class ImplSpec extends JobSpec {
     super(id, valueName);
   }
 
+  /** 생성 플래그 */
   private boolean genFlag;
 
+  /**
+   * 조건에 따라 생성 플래그를 설정합니다.
+   * @return 현재 ImplSpec 인스턴스
+   */
   public ImplSpec setGenFlagByCondition() {
     // condition 에 다라 generate flag 를 설정한다.
     return this;

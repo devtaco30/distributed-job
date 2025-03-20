@@ -23,13 +23,20 @@ import com.devtaco.distribute.service.SlackService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * repository 에서 spec 읽어서, elasticJob 으로 등록한다.( schedule !)
+ * 분산 작업 등록 및 관리를 담당하는 클래스입니다.
+ * ElasticJob을 사용하여 작업을 등록하고 스케줄링합니다.
+ * 
+ * 주요 기능:
+ * - 작업 스펙 기반의 동적 작업 등록
+ * - ZooKeeper를 통한 작업 조정
+ * - 작업 생명주기 관리
+ * - Slack을 통한 알림 발송
  */
 @Slf4j
 @Component
 public class JobRegistration {
 
-  /** 등록할 job name 에 붙을 prefix */
+  /** 작업 이름에 사용될 prefix */
   private static final String JOB_PREFIX = "devtaco-ejob-";
 
   @Value("${spring.profiles.active}") 
@@ -63,7 +70,8 @@ public class JobRegistration {
   }
 
   /**
-   * init 하면서 spec list 를 모두 받아서 job 을 등록한다.
+   * 작업 스펙 목록을 조회하여 초기 작업들을 등록합니다.
+   * Spring 컨테이너 초기화 시 자동 실행됩니다.
    */
   @PostConstruct
   public void initialize(){
@@ -78,10 +86,12 @@ public class JobRegistration {
     }
   }
 
-  /** 
-   * init job 등록 이후, 추가되는 job 들은 중간에 치고 들어가는 경우이다. <p>
-   * thread 간 경쟁이 심하게 생길 경우가 아니므로, 함수 level 에서  synchronized <p>
-   * */
+  /**
+   * 새로운 작업을 등록합니다.
+   * 스레드 안전성을 보장하기 위해 동기화됩니다.
+   * 
+   * @param spec 등록할 작업 스펙
+   */
   public synchronized void registJob( JobSpec spec ) {
     if (spec.isExecuteFlag()) {
       if ( spec instanceof ImplSpec ) {

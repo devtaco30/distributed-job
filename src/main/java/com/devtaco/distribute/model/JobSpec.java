@@ -10,8 +10,8 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
- * 산출 value 와 그 값이 계산될 때의 정보를 담는다. <p/>
- * impl 에서 이 value 를 도출하는 business 로직을 작성한다.
+ * 작업 스펙의 기본 속성을 정의하는 추상 클래스입니다.
+ * 작업의 식별자, 이름, 실행 조건 등 기본 정보를 관리합니다.
  */
 @Setter
 @Getter
@@ -19,6 +19,12 @@ import lombok.experimental.Accessors;
 @ToString
 public abstract class JobSpec {
 
+  /**
+   * 작업 스펙을 생성합니다.
+   * 
+   * @param id 작업 식별자
+   * @param jobName 작업 이름
+   */
   public JobSpec(int id, String jobName) {
     this.id = id;
     this.jobName = jobName;
